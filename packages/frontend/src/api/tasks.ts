@@ -61,6 +61,29 @@ export function useToggleTask() {
   })
 }
 
+export function useUpdateText() {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: ({ id, text }: { id: string; text: string }) =>
+      updateTaskApi(id, { text }),
+    onMutate: async ({ id, text }) => {
+      await queryClient.cancelQueries({ queryKey: ['tasks'] })
+      const previous = queryClient.getQueryData<Task[]>(['tasks'])
+      queryClient.setQueryData<Task[]>(['tasks'], (old = []) =>
+        old.map((t) => (t.id === id ? { ...t, text } : t)),
+      )
+      return { previous }
+    },
+    onError: (_err, _vars, context) => {
+      if (context?.previous) queryClient.setQueryData(['tasks'], context.previous)
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ['tasks'] })
+    },
+  })
+}
+
 export function useDeleteTask() {
   const queryClient = useQueryClient()
 
