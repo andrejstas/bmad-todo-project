@@ -1,34 +1,29 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Box, Container, Heading, VStack } from '@chakra-ui/react'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <Box as="main" bg="#FAFAFA" minH="100vh">
+      <Container maxW="600px" pt={{ base: '32px', md: '80px' }}>
+        <Box
+          bg="white"
+          borderRadius="12px"
+          boxShadow="0 1px 3px rgba(0,0,0,0.08)"
+          p="24px"
+        >
+          <VStack gap="24px" align="stretch">
+            <Heading
+              as="h1"
+              fontSize="20px"
+              fontWeight="600"
+              color="#1D1D1F"
+              lineHeight="1.5"
+            >
+              Tasks
+            </Heading>
+          </VStack>
+        </Box>
+      </Container>
+    </Box>
   )
 }
 
