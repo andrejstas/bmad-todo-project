@@ -1,7 +1,10 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch(domain:docs.bmad-method.org)"
+      "WebFetch(domain:docs.bmad-method.org)",
+      "Bash(python3:*)",
+      "WebSearch",
+      "Bash(git:*)"
     ]
   }
 }
