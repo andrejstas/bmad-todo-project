@@ -1,0 +1,21 @@
+node_modules/
+dist/
+.vite/
+*.tsbuildinfo
+coverage/
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+
+# Yarn
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+.pnp.*

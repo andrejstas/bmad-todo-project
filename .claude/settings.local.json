@@ -4,7 +4,16 @@
       "WebFetch(domain:docs.bmad-method.org)",
       "Bash(python3:*)",
       "WebSearch",
-      "Bash(git:*)"
+      "Bash(git:*)",
+      "Bash(corepack --version)",
+      "Bash(corepack enable:*)",
+      "Bash(corepack use:*)",
+      "Bash(yarn create:*)",
+      "Bash(npx create-vite:*)",
+      "Bash(yarn install:*)",
+      "Bash(yarn --version)",
+      "Bash(corepack yarn:*)",
+      "Bash(ls /Users/andrejstas/Projects/Nearform/bmad/.pnp.*)"
     ]
   }
 }
