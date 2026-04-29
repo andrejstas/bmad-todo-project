@@ -1,5 +1,5 @@
 import { Box, Container, Heading, VStack } from '@chakra-ui/react'
-import { useTasks, useToggleTask } from './api/tasks'
+import { useTasks, useToggleTask, useDeleteTask } from './api/tasks'
 import { ProgressCounter } from './components/ProgressCounter'
 import { TaskInput } from './components/TaskInput'
 import { TaskList } from './components/TaskList'
@@ -7,9 +7,14 @@ import { TaskList } from './components/TaskList'
 function App() {
   const { data: tasks = [] } = useTasks()
   const toggleTask = useToggleTask()
+  const deleteTask = useDeleteTask()
 
   const handleToggle = (id: string, completed: boolean) => {
     toggleTask.mutate({ id, completed })
+  }
+
+  const handleDelete = (id: string) => {
+    deleteTask.mutate(id)
   }
 
   return (
@@ -33,7 +38,7 @@ function App() {
             </Heading>
             <ProgressCounter tasks={tasks} />
             <TaskInput />
-            <TaskList tasks={tasks} onToggle={handleToggle} />
+            <TaskList tasks={tasks} onToggle={handleToggle} onDelete={handleDelete} />
           </VStack>
         </Box>
       </Container>
