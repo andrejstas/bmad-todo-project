@@ -18,11 +18,11 @@ export function TaskList({ tasks, onToggle, onDelete, onEdit }: TaskListProps) {
   return (
     <VStack as="ul" role="list" gap="0" align="stretch" p="0" m="0" listStyleType="none">
       {active.map((task) => (
-        <TaskItem key={task.id} task={task} onToggle={onToggle} onDelete={onDelete} onEdit={onEdit} />
+        <TaskItem key={`active-${task.id}`} task={task} onToggle={onToggle} onDelete={onDelete} onEdit={onEdit} />
       ))}
       {active.length > 0 && completed.length > 0 && <Separator />}
       {completed.map((task) => (
-        <TaskItem key={task.id} task={task} onToggle={onToggle} onDelete={onDelete} onEdit={onEdit} />
+        <TaskItem key={`completed-${task.id}`} task={task} onToggle={onToggle} onDelete={onDelete} onEdit={onEdit} />
       ))}
     </VStack>
   )

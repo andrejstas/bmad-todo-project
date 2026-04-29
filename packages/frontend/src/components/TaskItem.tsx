@@ -51,6 +51,15 @@ export function TaskItem({ task, onToggle, onDelete, onEdit }: TaskItemProps) {
       py="8px"
       px="4px"
       css={{
+        animation: 'fadeSlideIn 0.2s ease-out',
+        '@keyframes fadeSlideIn': {
+          from: { opacity: 0, transform: 'translateY(-8px)' },
+          to: { opacity: 1, transform: 'translateY(0)' },
+        },
+        '@media (prefers-reduced-motion: reduce)': {
+          animation: 'none',
+          '& .delete-btn': { transition: 'none' },
+        },
         '& .delete-btn': { opacity: 0, transition: 'opacity 0.15s' },
         '&:hover .delete-btn, &:focus-within .delete-btn, & .delete-btn:focus-visible': { opacity: 1 },
       }}
