@@ -1,6 +1,12 @@
 import { Box, Container, Heading, VStack } from '@chakra-ui/react'
+import { useTasks } from './api/tasks'
+import { ProgressCounter } from './components/ProgressCounter'
+import { TaskInput } from './components/TaskInput'
+import { TaskList } from './components/TaskList'
 
 function App() {
+  const { data: tasks = [] } = useTasks()
+
   return (
     <Box as="main" bg="#FAFAFA" minH="100vh">
       <Container maxW="600px" pt={{ base: '32px', md: '80px' }}>
@@ -20,6 +26,9 @@ function App() {
             >
               Tasks
             </Heading>
+            <ProgressCounter tasks={tasks} />
+            <TaskInput />
+            <TaskList tasks={tasks} />
           </VStack>
         </Box>
       </Container>
