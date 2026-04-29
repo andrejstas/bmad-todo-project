@@ -19,11 +19,41 @@ function createTaskApi(text: string): Promise<Task> {
   })
 }
 
+function updateTaskApi(id: string, updates: { completed?: boolean; text?: string }): Promise<Task> {
+  return apiFetch<Task>(`/tasks/${id}`, {
+    method: 'PATCH',
+    body: JSON.stringify(updates),
+  })
+}
+
 export function useTasks() {
   return useQuery({
     queryKey: ['tasks'],
     queryFn: fetchTasks,
     staleTime: 30_000,
+  })
+}
+
+export function useToggleTask() {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: ({ id, completed }: { id: string; completed: boolean }) =>
+      updateTaskApi(id, { completed }),
+    onMutate: async ({ id, completed }) => {
+      await queryClient.cancelQueries({ queryKey: ['tasks'] })
+      const previous = queryClient.getQueryData<Task[]>(['tasks'])
+      queryClient.setQueryData<Task[]>(['tasks'], (old = []) =>
+        old.map((t) => (t.id === id ? { ...t, completed } : t)),
+      )
+      return { previous }
+    },
+    onError: (_err, _vars, context) => {
+      if (context?.previous) queryClient.setQueryData(['tasks'], context.previous)
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ['tasks'] })
+    },
   })
 }
 

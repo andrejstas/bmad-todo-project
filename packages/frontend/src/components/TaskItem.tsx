@@ -4,20 +4,25 @@ import type { Task } from '../api/tasks'
 
 interface TaskItemProps {
   task: Task
+  onToggle: (id: string, completed: boolean) => void
 }
 
-export function TaskItem({ task }: TaskItemProps) {
+export function TaskItem({ task, onToggle }: TaskItemProps) {
   return (
     <HStack as="li" gap="12px" py="8px" px="4px">
       <Checkbox.Root
         checked={task.completed}
-        onCheckedChange={() => {}}
-        aria-label={task.text}
+        onCheckedChange={() => onToggle(task.id, !task.completed)}
       >
-        <Checkbox.HiddenInput />
+        <Checkbox.HiddenInput aria-label={task.text} />
         <Checkbox.Control />
       </Checkbox.Root>
-      <Text fontSize="16px" color="#1D1D1F" lineHeight="1.5">
+      <Text
+        fontSize="16px"
+        color={task.completed ? '#6E6E73' : '#1D1D1F'}
+        lineHeight="1.5"
+        textDecoration={task.completed ? 'line-through' : 'none'}
+      >
         {task.text}
       </Text>
     </HStack>
