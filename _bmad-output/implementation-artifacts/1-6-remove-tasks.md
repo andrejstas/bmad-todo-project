@@ -1,6 +1,6 @@
 # Story 1.6: Remove Tasks
 
-Status: review
+Status: done
 
 ## Story
 
@@ -49,7 +49,7 @@ so that my list stays clean and relevant.
 
 ### Review Findings
 
-- [ ] [Review][Patch] Add `&:focus-within .delete-btn` CSS rule so keyboard focus on any element in the row reveals delete button [TaskItem.tsx]
+- [x] [Review][Patch] Add `&:focus-within .delete-btn` CSS rule — FIXED [TaskItem.tsx]
 - [x] [Review][Defer] `opacity: 0` button still clickable/focusable at rest — deferred, Epic 3 (accessibility)
 - [x] [Review][Defer] Rapid double-delete race condition — deferred, task removed from DOM on optimistic update
 - [x] [Review][Defer] Content-Type header sent on DELETE with no body — deferred, harmless
