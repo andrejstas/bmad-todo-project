@@ -42,28 +42,28 @@ describe('TaskList', () => {
     expect(screen.getByText('Done task')).toBeInTheDocument()
   })
 
-  it('renders separator when both active and completed tasks exist', () => {
+  it('renders divider when both active and completed tasks exist', () => {
     const tasks = [
       makeTask({ text: 'Active' }),
       makeTask({ text: 'Done', completed: true }),
     ]
-    renderWithProviders(<TaskList tasks={tasks} {...defaultProps} />)
-    expect(screen.getByRole('separator')).toBeInTheDocument()
+    const { container } = renderWithProviders(<TaskList tasks={tasks} {...defaultProps} />)
+    expect(container.querySelector('li[role="presentation"]')).toBeInTheDocument()
   })
 
-  it('does not render separator when only active tasks exist', () => {
+  it('does not render divider when only active tasks exist', () => {
     const tasks = [makeTask({ text: 'Active 1' }), makeTask({ text: 'Active 2' })]
-    renderWithProviders(<TaskList tasks={tasks} {...defaultProps} />)
-    expect(screen.queryByRole('separator')).not.toBeInTheDocument()
+    const { container } = renderWithProviders(<TaskList tasks={tasks} {...defaultProps} />)
+    expect(container.querySelector('li[role="presentation"]')).not.toBeInTheDocument()
   })
 
-  it('does not render separator when only completed tasks exist', () => {
+  it('does not render divider when only completed tasks exist', () => {
     const tasks = [
       makeTask({ text: 'Done 1', completed: true }),
       makeTask({ text: 'Done 2', completed: true }),
     ]
-    renderWithProviders(<TaskList tasks={tasks} {...defaultProps} />)
-    expect(screen.queryByRole('separator')).not.toBeInTheDocument()
+    const { container } = renderWithProviders(<TaskList tasks={tasks} {...defaultProps} />)
+    expect(container.querySelector('li[role="presentation"]')).not.toBeInTheDocument()
   })
 
   it('renders as a list with role="list"', () => {

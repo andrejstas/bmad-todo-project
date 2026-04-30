@@ -17,7 +17,9 @@
       "WebFetch(domain:www.chakra-ui.com)",
       "Bash(grep -l \"ready-for-dev\" _bmad-output/implementation-artifacts/*.md)",
       "Bash(node -e ':*)",
-      "Bash(npx playwright:*)"
+      "Bash(npx playwright:*)",
+      "Bash(curl -s http://localhost:3000/health)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173)"
     ]
   }
 }

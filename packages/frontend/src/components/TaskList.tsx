@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { VStack, Separator } from '@chakra-ui/react'
+import { VStack, Box } from '@chakra-ui/react'
 import type { Task } from '../api/tasks'
 import { TaskItem } from './TaskItem'
 
@@ -44,7 +44,11 @@ export function TaskList({ tasks, onToggle, onDelete, onEdit }: TaskListProps) {
       {active.map((task) => (
         <TaskItem key={`active-${task.id}`} task={task} onToggle={onToggle} onDelete={handleDeleteWithFocus} onEdit={onEdit} />
       ))}
-      {active.length > 0 && completed.length > 0 && <Separator />}
+      {active.length > 0 && completed.length > 0 && (
+        <li role="presentation" style={{ listStyle: 'none' }}>
+          <Box borderTopWidth="1px" borderColor="#E5E5EA" aria-hidden="true" />
+        </li>
+      )}
       {completed.map((task) => (
         <TaskItem key={`completed-${task.id}`} task={task} onToggle={onToggle} onDelete={handleDeleteWithFocus} onEdit={onEdit} />
       ))}
