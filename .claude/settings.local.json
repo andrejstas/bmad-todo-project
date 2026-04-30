@@ -22,7 +22,13 @@
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173)",
       "Bash(docker build:*)",
       "Bash(ls packages/backend/src/**/*.test.ts)",
-      "Bash(ls packages/frontend/src/**/*.test.*)"
+      "Bash(ls packages/frontend/src/**/*.test.*)",
+      "Bash(ls _bmad-output/planning-artifacts/*.md)",
+      "Bash(ls _bmad-output/implementation-artifacts/*.md)",
+      "Bash(ls packages/frontend/src/components/*.tsx)",
+      "Bash(ls packages/backend/src/routes/*.ts)",
+      "Bash(ls e2e/*.spec.ts)",
+      "Bash(ls docs/*.md README.md)"
     ]
   }
 }
