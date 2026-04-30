@@ -8,6 +8,19 @@ A single-session, zero-friction todo app. No signup, no install, no sync — jus
 
 Built as a React frontend with a Fastify REST API backend, deployed via Docker Compose. Deliberately minimal in features but built to a high engineering standard: comprehensive test coverage, WCAG AA accessibility, production-grade containerization, and structured QA practices.
 
+## Features
+
+- **Task management** — create, edit, complete/uncomplete, and delete tasks
+- **Instant feedback** — optimistic updates on all actions, no waiting for the server
+- **Visual clarity** — completed tasks shown with strikethrough in a separate section
+- **Responsive layout** — works on desktop and mobile with adaptive card design
+- **Empty state** — friendly message when no tasks exist
+- **Loading state** — spinner while fetching tasks from the server
+- **Error handling** — inline error with retry for fetch failures, toast notifications for mutation errors
+- **Persistent storage** — tasks survive server restarts via JSON file persistence
+- **Accessible** — WCAG AA compliant, keyboard navigable, screen reader support
+- **Containerized** — single `docker compose up` to run the full stack
+
 ## Tech Stack
 
 - **Frontend:** React 19, Chakra UI v3, TanStack Query, TypeScript
