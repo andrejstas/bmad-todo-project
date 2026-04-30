@@ -9,6 +9,9 @@ data/
 .idea/
 .vscode/
 
+# Claude
+.claude/
+
 # OS
 .DS_Store
 
