@@ -40,7 +40,7 @@ export function TaskList({ tasks, onToggle, onDelete, onEdit }: TaskListProps) {
   }
 
   return (
-    <VStack ref={listRef} as="ul" role="list" gap="0" align="stretch" p="0" m="0" listStyleType="none">
+    <VStack ref={listRef} as="ul" role="list" aria-live="polite" aria-relevant="additions removals" gap="0" align="stretch" p="0" m="0" listStyleType="none">
       {active.map((task) => (
         <TaskItem key={`active-${task.id}`} task={task} onToggle={onToggle} onDelete={handleDeleteWithFocus} onEdit={onEdit} />
       ))}
