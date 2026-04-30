@@ -15,7 +15,8 @@
       "Bash(corepack yarn:*)",
       "Bash(ls /Users/andrejstas/Projects/Nearform/bmad/.pnp.*)",
       "WebFetch(domain:www.chakra-ui.com)",
-      "Bash(grep -l \"ready-for-dev\" _bmad-output/implementation-artifacts/*.md)"
+      "Bash(grep -l \"ready-for-dev\" _bmad-output/implementation-artifacts/*.md)",
+      "Bash(node -e ':*)"
     ]
   }
 }
