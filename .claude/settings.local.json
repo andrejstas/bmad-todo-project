@@ -31,7 +31,10 @@
       "Bash(ls docs/*.md README.md)",
       "Bash(grep -E \"status:|sprint_status:|## Sprint\" /Users/andrejstas/Projects/Nearform/bmad/_bmad-output/implementation-artifacts/*.md)",
       "Bash(grep -l \"Status: done\" /Users/andrejstas/Projects/Nearform/bmad/_bmad-output/implementation-artifacts/*.md)",
-      "Bash(ls /Users/andrejstas/Projects/Nearform/bmad/_bmad-output/implementation-artifacts/*.md)"
+      "Bash(ls /Users/andrejstas/Projects/Nearform/bmad/_bmad-output/implementation-artifacts/*.md)",
+      "Bash(yarn workspace:*)",
+      "Bash(npx vitest:*)",
+      "Bash(npx -p vitest vitest --run packages/frontend)"
     ]
   }
 }

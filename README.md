@@ -4,6 +4,8 @@
 
 A single-session, zero-friction todo app. No signup, no install, no sync — just add tasks, work through them, and close the tab when you're done.
 
+![Demo](assets/demo.gif)
+
 Built as a React frontend with a Fastify REST API backend, deployed via Docker Compose. Deliberately minimal in features but built to a high engineering standard: comprehensive test coverage, WCAG AA accessibility, production-grade containerization, and structured QA practices.
 
 ## Tech Stack
