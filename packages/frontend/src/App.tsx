@@ -24,12 +24,13 @@ function App() {
 
   return (
     <Box as="main" bg="#FAFAFA" minH="100vh">
-      <Container maxW="600px" pt={{ base: '32px', md: '80px' }}>
+      <Container maxW={{ base: '100%', md: '600px' }} px={{ base: '0', md: '4' }} pt={{ base: '32px', md: '80px' }}>
         <Box
           bg="white"
-          borderRadius="12px"
-          boxShadow="0 1px 3px rgba(0,0,0,0.08)"
-          p="24px"
+          borderRadius={{ base: '0', md: '12px' }}
+          boxShadow={{ base: 'none', md: '0 1px 3px rgba(0,0,0,0.08)' }}
+          px={{ base: '16px', md: '24px' }}
+          py="24px"
         >
           <VStack gap="24px" align="stretch">
             <Heading

@@ -60,8 +60,11 @@ export function TaskItem({ task, onToggle, onDelete, onEdit }: TaskItemProps) {
           animation: 'none',
           '& .delete-btn': { transition: 'none' },
         },
-        '& .delete-btn': { opacity: 0, transition: 'opacity 0.15s' },
-        '&:hover .delete-btn, &:focus-within .delete-btn, & .delete-btn:focus-visible': { opacity: 1 },
+        '& .delete-btn': { transition: 'opacity 0.15s' },
+        '@media (min-width: 48em)': {
+          '& .delete-btn': { opacity: 0 },
+          '&:hover .delete-btn, &:focus-within .delete-btn, & .delete-btn:focus-visible': { opacity: 1 },
+        },
       }}
     >
       <Checkbox.Root

@@ -7,3 +7,7 @@
 - Helmet defaults block inline styles — will break Chakra UI CSS-in-JS when backend serves frontend (Epic 5)
 - No root-level build/test/dev scripts — add `yarn workspaces foreach` convenience scripts
 - No `process.on('unhandledRejection')` handler — add for production robustness (Epic 5)
+
+## Deferred from: code review of 2-3-responsive-layout-touch-adaptation (2026-04-30)
+
+- Hardcoded `48em` in TaskItem.tsx `css` prop media query won't track if Chakra's `md` breakpoint is customized — no clean CSS-only fix available without `useBreakpointValue`
