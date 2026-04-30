@@ -47,6 +47,7 @@ export function TaskItem({ task, onToggle, onDelete, onEdit }: TaskItemProps) {
   return (
     <HStack
       as="li"
+      data-task-id={task.id}
       gap="12px"
       py="8px"
       px="4px"
@@ -102,7 +103,14 @@ export function TaskItem({ task, onToggle, onDelete, onEdit }: TaskItemProps) {
           lineHeight="1.5"
           textDecoration={task.completed ? 'line-through' : 'none'}
           cursor="text"
+          tabIndex={0}
           onClick={startEditing}
+          onKeyDown={(e: React.KeyboardEvent) => {
+            if (e.key === 'Enter') {
+              e.preventDefault()
+              startEditing()
+            }
+          }}
         >
           {task.text}
         </Text>

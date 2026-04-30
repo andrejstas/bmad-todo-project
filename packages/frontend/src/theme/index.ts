@@ -1,6 +1,13 @@
 import { createSystem, defaultConfig, defineConfig } from '@chakra-ui/react'
 
 const config = defineConfig({
+  globalCss: {
+    '*:focus-visible': {
+      outline: '2px solid #007AFF',
+      outlineOffset: '2px',
+      boxShadow: 'none',
+    },
+  },
   theme: {
     tokens: {
       colors: {

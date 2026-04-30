@@ -1,3 +1,4 @@
+import { useRef } from 'react'
 import { VStack, Separator } from '@chakra-ui/react'
 import type { Task } from '../api/tasks'
 import { TaskItem } from './TaskItem'
@@ -10,19 +11,42 @@ interface TaskListProps {
 }
 
 export function TaskList({ tasks, onToggle, onDelete, onEdit }: TaskListProps) {
+  const listRef = useRef<HTMLDivElement>(null)
+
   if (tasks.length === 0) return null
 
   const active = tasks.filter((t) => !t.completed)
   const completed = tasks.filter((t) => t.completed)
 
+  const handleDeleteWithFocus = (id: string) => {
+    const listEl = listRef.current
+    if (!listEl) { onDelete(id); return }
+
+    const items = Array.from(listEl.querySelectorAll<HTMLElement>('[data-task-id]'))
+    const index = items.findIndex(el => el.dataset.taskId === id)
+
+    onDelete(id)
+
+    requestAnimationFrame(() => {
+      const newItems = Array.from(listEl.querySelectorAll<HTMLElement>('[data-task-id]'))
+      if (newItems.length === 0) {
+        document.querySelector<HTMLElement>('[aria-label="Add a new task"]')?.focus()
+        return
+      }
+      const targetIndex = index < 0 ? 0 : Math.min(index, newItems.length - 1)
+      const focusable = newItems[targetIndex]?.querySelector<HTMLElement>('input, button, [tabindex="0"]')
+      focusable?.focus()
+    })
+  }
+
   return (
-    <VStack as="ul" role="list" gap="0" align="stretch" p="0" m="0" listStyleType="none">
+    <VStack ref={listRef} as="ul" role="list" gap="0" align="stretch" p="0" m="0" listStyleType="none">
       {active.map((task) => (
-        <TaskItem key={`active-${task.id}`} task={task} onToggle={onToggle} onDelete={onDelete} onEdit={onEdit} />
+        <TaskItem key={`active-${task.id}`} task={task} onToggle={onToggle} onDelete={handleDeleteWithFocus} onEdit={onEdit} />
       ))}
       {active.length > 0 && completed.length > 0 && <Separator />}
       {completed.map((task) => (
-        <TaskItem key={`completed-${task.id}`} task={task} onToggle={onToggle} onDelete={onDelete} onEdit={onEdit} />
+        <TaskItem key={`completed-${task.id}`} task={task} onToggle={onToggle} onDelete={handleDeleteWithFocus} onEdit={onEdit} />
       ))}
     </VStack>
   )
