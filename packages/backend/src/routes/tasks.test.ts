@@ -137,6 +137,57 @@ describe('task routes', () => {
       })
       expect(response.statusCode).toBe(400)
     })
+
+    it('returns 400 for text exceeding 500 characters', async () => {
+      const createRes = await server.inject({
+        method: 'POST',
+        url: '/api/tasks',
+        payload: { text: 'Test' },
+      })
+      const { id } = createRes.json()
+
+      const response = await server.inject({
+        method: 'PATCH',
+        url: `/api/tasks/${id}`,
+        payload: { text: 'a'.repeat(501) },
+      })
+      expect(response.statusCode).toBe(400)
+    })
+
+    it('updates both text and completion in one request', async () => {
+      const createRes = await server.inject({
+        method: 'POST',
+        url: '/api/tasks',
+        payload: { text: 'Original' },
+      })
+      const { id } = createRes.json()
+
+      const response = await server.inject({
+        method: 'PATCH',
+        url: `/api/tasks/${id}`,
+        payload: { text: 'Updated', completed: true },
+      })
+      expect(response.statusCode).toBe(200)
+      const task = response.json()
+      expect(task.text).toBe('Updated')
+      expect(task.completed).toBe(true)
+    })
+  })
+
+  describe('POST /api/tasks response shape', () => {
+    it('returns all expected fields in response body', async () => {
+      const response = await server.inject({
+        method: 'POST',
+        url: '/api/tasks',
+        payload: { text: 'Shape test' },
+      })
+      const task = response.json()
+      expect(Object.keys(task).sort()).toEqual(['completed', 'createdAt', 'id', 'text'])
+      expect(typeof task.id).toBe('string')
+      expect(typeof task.text).toBe('string')
+      expect(typeof task.completed).toBe('boolean')
+      expect(typeof task.createdAt).toBe('string')
+    })
   })
 
   describe('DELETE /api/tasks/:id', () => {
@@ -154,6 +205,21 @@ describe('task routes', () => {
       })
       expect(response.statusCode).toBe(204)
       expect(response.body).toBe('')
+    })
+
+    it('confirms task is removed after deletion', async () => {
+      const createRes = await server.inject({
+        method: 'POST',
+        url: '/api/tasks',
+        payload: { text: 'To be deleted' },
+      })
+      const { id } = createRes.json()
+
+      await server.inject({ method: 'DELETE', url: `/api/tasks/${id}` })
+
+      const listRes = await server.inject({ method: 'GET', url: '/api/tasks' })
+      const tasks = listRes.json()
+      expect(tasks.find((t: { id: string }) => t.id === id)).toBeUndefined()
     })
 
     it('returns 404 for non-existent task', async () => {
