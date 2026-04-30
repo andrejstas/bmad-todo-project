@@ -1,0 +1,11 @@
+node_modules
+dist
+coverage
+.git
+.vite
+_bmad-output
+_bmad
+.claude
+e2e
+*.tsbuildinfo
+.DS_Store
