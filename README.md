@@ -1,4 +1,6 @@
-# bmad
+# Todo App Created with BMAD
+
+> **[BMAD](https://github.com/bmadcode/BMAD-METHOD)** (BMad Method for AI-Driven Development) is a spec-driven development framework where AI agents handle the entire lifecycle — from product requirements and UX design through architecture, implementation, and code review. Instead of prompting an AI to "build me an app," BMAD generates structured planning artifacts (PRD, UX spec, architecture doc, epic breakdown) that flow into comprehensive story files, giving AI dev agents everything they need for consistent, high-quality implementation.
 
 A single-session, zero-friction todo app. No signup, no install, no sync — just add tasks, work through them, and close the tab when you're done.
 
