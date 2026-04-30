@@ -71,6 +71,10 @@ export function TaskItem({ task, onToggle, onDelete, onEdit }: TaskItemProps) {
       <Checkbox.Root
         checked={task.completed}
         onCheckedChange={() => onToggle(task.id, !task.completed)}
+        minH="44px"
+        minW="44px"
+        display="flex"
+        alignItems="center"
       >
         <Checkbox.HiddenInput aria-label={task.text} />
         <Checkbox.Control />
@@ -97,6 +101,7 @@ export function TaskItem({ task, onToggle, onDelete, onEdit }: TaskItemProps) {
         />
       ) : (
         <Text
+          role="button"
           flex="1"
           fontSize="16px"
           color={task.completed ? '#6E6E73' : '#1D1D1F'}
@@ -121,6 +126,8 @@ export function TaskItem({ task, onToggle, onDelete, onEdit }: TaskItemProps) {
         size="sm"
         variant="ghost"
         color="#FF3B30"
+        minH="44px"
+        minW="44px"
         onClick={() => onDelete(task.id)}
       >
         ✕
