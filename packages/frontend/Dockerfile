@@ -4,6 +4,7 @@ WORKDIR /app
 RUN corepack enable
 COPY package.json yarn.lock .yarnrc.yml ./
 COPY packages/frontend/package.json packages/frontend/
+COPY packages/backend/package.json packages/backend/
 RUN yarn install --immutable
 COPY tsconfig.base.json ./
 COPY packages/frontend packages/frontend

@@ -9,7 +9,7 @@ Built as a React frontend with a Fastify REST API backend, deployed via Docker C
 ## Tech Stack
 
 - **Frontend:** React 19, Chakra UI v3, TanStack Query, TypeScript
-- **Backend:** Fastify 5, Node.js 22, in-memory storage
+- **Backend:** Fastify 5, Node.js 22, JSON file persistence
 - **Testing:** Vitest (unit/integration), Playwright (E2E), axe-core (accessibility)
 - **Deployment:** Docker Compose, multi-stage builds, nginx reverse proxy
 - **Code Quality:** ESLint, strict TypeScript, WCAG AA compliance
@@ -39,7 +39,7 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 ### Docker
 
 ```bash
-docker-compose up
+docker compose up
 ```
 
 The app is accessible at [http://localhost:8080](http://localhost:8080). Both backend and frontend containers start automatically. The backend health check ensures the API is ready before the frontend starts serving.

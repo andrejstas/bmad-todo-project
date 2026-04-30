@@ -28,7 +28,10 @@
       "Bash(ls packages/frontend/src/components/*.tsx)",
       "Bash(ls packages/backend/src/routes/*.ts)",
       "Bash(ls e2e/*.spec.ts)",
-      "Bash(ls docs/*.md README.md)"
+      "Bash(ls docs/*.md README.md)",
+      "Bash(grep -E \"status:|sprint_status:|## Sprint\" /Users/andrejstas/Projects/Nearform/bmad/_bmad-output/implementation-artifacts/*.md)",
+      "Bash(grep -l \"Status: done\" /Users/andrejstas/Projects/Nearform/bmad/_bmad-output/implementation-artifacts/*.md)",
+      "Bash(ls /Users/andrejstas/Projects/Nearform/bmad/_bmad-output/implementation-artifacts/*.md)"
     ]
   }
 }
