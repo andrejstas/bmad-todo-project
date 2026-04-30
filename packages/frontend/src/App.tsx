@@ -1,11 +1,11 @@
-import { Box, Container, Heading, VStack } from '@chakra-ui/react'
+import { Box, Button, Container, Heading, Spinner, Text, VStack } from '@chakra-ui/react'
 import { useTasks, useToggleTask, useDeleteTask, useUpdateText } from './api/tasks'
 import { ProgressCounter } from './components/ProgressCounter'
 import { TaskInput } from './components/TaskInput'
 import { TaskList } from './components/TaskList'
 
 function App() {
-  const { data: tasks = [] } = useTasks()
+  const { data: tasks = [], isPending, isError, refetch } = useTasks()
   const toggleTask = useToggleTask()
   const deleteTask = useDeleteTask()
   const updateText = useUpdateText()
@@ -42,9 +42,20 @@ function App() {
             >
               Tasks
             </Heading>
-            <ProgressCounter tasks={tasks} />
-            <TaskInput />
-            <TaskList tasks={tasks} onToggle={handleToggle} onDelete={handleDelete} onEdit={handleEdit} />
+            {!isPending && !isError && <ProgressCounter tasks={tasks} />}
+            {!isError && <TaskInput />}
+            {isPending ? (
+              <Box textAlign="center" py="24px">
+                <Spinner size="sm" color="#007AFF" aria-label="Loading tasks" />
+              </Box>
+            ) : isError ? (
+              <VStack py="24px" gap="12px">
+                <Text color="#FF3B30" fontSize="16px">Failed to load tasks</Text>
+                <Button size="sm" variant="outline" onClick={() => refetch()}>Try again</Button>
+              </VStack>
+            ) : (
+              <TaskList tasks={tasks} onToggle={handleToggle} onDelete={handleDelete} onEdit={handleEdit} />
+            )}
           </VStack>
         </Box>
       </Container>

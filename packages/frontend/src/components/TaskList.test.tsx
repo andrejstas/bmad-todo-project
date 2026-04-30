@@ -21,9 +21,9 @@ const defaultProps = {
 }
 
 describe('TaskList', () => {
-  it('returns null when tasks array is empty', () => {
-    const { container } = renderWithProviders(<TaskList tasks={[]} {...defaultProps} />)
-    expect(container.firstChild).toBeNull()
+  it('shows empty state message when tasks array is empty', () => {
+    renderWithProviders(<TaskList tasks={[]} {...defaultProps} />)
+    expect(screen.getByText('No tasks yet')).toBeInTheDocument()
   })
 
   it('renders active tasks', () => {

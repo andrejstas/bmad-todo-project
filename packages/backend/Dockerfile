@@ -20,6 +20,7 @@ COPY packages/backend/package.json packages/backend/
 COPY packages/frontend/package.json packages/frontend/
 RUN yarn workspaces focus backend --production
 COPY --from=build /app/packages/backend/dist packages/backend/dist
+RUN mkdir -p data && chown node:node data
 USER node
 ENV PORT=3000 HOST=0.0.0.0
 EXPOSE 3000

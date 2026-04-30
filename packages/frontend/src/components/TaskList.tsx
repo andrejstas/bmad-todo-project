@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { VStack, Box } from '@chakra-ui/react'
+import { VStack, Box, Text } from '@chakra-ui/react'
 import type { Task } from '../api/tasks'
 import { TaskItem } from './TaskItem'
 
@@ -13,7 +13,13 @@ interface TaskListProps {
 export function TaskList({ tasks, onToggle, onDelete, onEdit }: TaskListProps) {
   const listRef = useRef<HTMLDivElement>(null)
 
-  if (tasks.length === 0) return null
+  if (tasks.length === 0) {
+    return (
+      <Text role="status" fontSize="16px" color="#6E6E73" textAlign="center" py="24px">
+        No tasks yet
+      </Text>
+    )
+  }
 
   const active = tasks.filter((t) => !t.completed)
   const completed = tasks.filter((t) => t.completed)

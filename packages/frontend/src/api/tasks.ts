@@ -1,5 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { createToaster } from '@chakra-ui/react'
 import { apiFetch } from './client'
+
+export const toaster = createToaster({ placement: 'bottom-end', duration: 3000 })
 
 export interface Task {
   id: string
@@ -54,6 +57,7 @@ export function useToggleTask() {
     },
     onError: (_err, _vars, context) => {
       if (context?.previous) queryClient.setQueryData(['tasks'], context.previous)
+      toaster.create({ id: 'mutation-error', title: 'Something went wrong. Please try again.', type: 'error' })
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ['tasks'] })
@@ -77,6 +81,7 @@ export function useUpdateText() {
     },
     onError: (_err, _vars, context) => {
       if (context?.previous) queryClient.setQueryData(['tasks'], context.previous)
+      toaster.create({ id: 'mutation-error', title: 'Something went wrong. Please try again.', type: 'error' })
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ['tasks'] })
@@ -99,6 +104,7 @@ export function useDeleteTask() {
     },
     onError: (_err, _id, context) => {
       if (context?.previous) queryClient.setQueryData(['tasks'], context.previous)
+      toaster.create({ id: 'mutation-error', title: 'Something went wrong. Please try again.', type: 'error' })
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ['tasks'] })
@@ -122,6 +128,7 @@ export function useCreateTask() {
     },
     onError: (_err, _text, context) => {
       if (context?.previous) queryClient.setQueryData(['tasks'], context.previous)
+      toaster.create({ id: 'mutation-error', title: 'Something went wrong. Please try again.', type: 'error' })
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ['tasks'] })
