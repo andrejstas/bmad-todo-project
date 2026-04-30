@@ -20,7 +20,9 @@
       "Bash(npx playwright:*)",
       "Bash(curl -s http://localhost:3000/health)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173)",
-      "Bash(docker build:*)"
+      "Bash(docker build:*)",
+      "Bash(ls packages/backend/src/**/*.test.ts)",
+      "Bash(ls packages/frontend/src/**/*.test.*)"
     ]
   }
 }
