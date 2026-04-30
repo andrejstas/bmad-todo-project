@@ -8,7 +8,9 @@ import healthRoutes from './routes/health.js'
 export function buildServer() {
   const fastify = Fastify({ logger: true })
 
-  fastify.register(cors)
+  fastify.register(cors, {
+    origin: process.env.CORS_ORIGIN || true,
+  })
   fastify.register(helmet)
   fastify.register(sensible)
 

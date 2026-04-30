@@ -1,8 +1,10 @@
 import { buildServer } from './server.js'
 
 const server = buildServer()
+const port = Number(process.env.PORT) || 3000
+const host = process.env.HOST || '0.0.0.0'
 
-server.listen({ port: 3000, host: '0.0.0.0' }, (err, address) => {
+server.listen({ port, host }, (err, address) => {
   if (err) {
     server.log.error(err)
     process.exit(1)
