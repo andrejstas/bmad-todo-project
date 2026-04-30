@@ -38,7 +38,7 @@ describe('API hooks', () => {
       await waitFor(() => expect(result.current.isSuccess).toBe(true))
       expect(mockFetch).toHaveBeenCalledWith(
         '/api/tasks',
-        expect.objectContaining({ headers: { 'Content-Type': 'application/json' } }),
+        expect.objectContaining({ headers: {} }),
       )
     })
 
