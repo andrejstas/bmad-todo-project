@@ -3,6 +3,7 @@ dist/
 .vite/
 *.tsbuildinfo
 coverage/
+data/
 
 # IDE
 .idea/

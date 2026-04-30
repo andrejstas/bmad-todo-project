@@ -1,4 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest'
+import { existsSync, readFileSync } from 'node:fs'
 import { getAllTasks, getTask, createTask, updateTask, deleteTask, clearTasks } from './taskStore.js'
 
 describe('taskStore', () => {
@@ -94,6 +95,31 @@ describe('taskStore', () => {
     it('removes all tasks', () => {
       createTask('Task 1')
       createTask('Task 2')
+      clearTasks()
+      expect(getAllTasks()).toEqual([])
+    })
+  })
+
+  describe('persistence', () => {
+    const DATA_FILE = process.env.DATA_FILE || './data/tasks.json'
+
+    it('persists tasks to a JSON file on create', () => {
+      createTask('Persisted task')
+      expect(existsSync(DATA_FILE)).toBe(true)
+      const data = JSON.parse(readFileSync(DATA_FILE, 'utf-8'))
+      const tasks = Object.values(data) as { text: string }[]
+      expect(tasks).toHaveLength(1)
+      expect(tasks[0].text).toBe('Persisted task')
+    })
+
+    it('clearTasks removes the data file', () => {
+      createTask('To be cleared')
+      expect(existsSync(DATA_FILE)).toBe(true)
+      clearTasks()
+      expect(existsSync(DATA_FILE)).toBe(false)
+    })
+
+    it('starts with empty list when no data file exists', () => {
       clearTasks()
       expect(getAllTasks()).toEqual([])
     })
